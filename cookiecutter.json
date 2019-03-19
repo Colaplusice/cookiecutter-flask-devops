@@ -1,0 +1,6 @@
+{
+  "project_name": "flask_project",
+  "app_name": "app",
+  "create_api": "y",
+  "_is_test_env": "n"
+}

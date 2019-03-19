@@ -1,0 +1,36 @@
+[[source]]
+url = "https://mirrors.aliyun.com/pypi/simple"
+verify_ssl = true
+name = "aliyun"
+
+[[source]]
+url = "https://pypi.17bdc.com/simple"
+verify_ssl = true
+name = "17bdc"
+
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+cookiecutter="*"
+
+[dev-packages]
+black = "*"
+flake8 = "*"
+flake8-bugbear = "*"
+flake8-mypy = "*"
+isort = {version = "*", extras=["pipfile"]}
+mypy = ">=0.620"
+pre-commit = "*"
+pytest = "*"
+pytest-cov = "*"
+pytest-cookies="*"
+seed-isort-config = "*"
+
+[requires]
+python_version = "3.6"
+
+[pipenv]
+allow_prereleases = true

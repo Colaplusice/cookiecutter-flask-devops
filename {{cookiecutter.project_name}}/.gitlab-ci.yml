@@ -1,0 +1,86 @@
+stages:
+- test_all
+- build_image
+- deploy_integration
+- deploy_staging
+- deploy_production
+
+variables:
+  MYSQL_DATABASE: {{cookiecutter.project_name}}_test
+  MYSQL_ROOT_PASSWORD: toor333666
+  FLASK_ENV: testing
+  DOCKER_HOST: tcp://dockerd:2375
+  IMAGE: registry.cn-hangzhou.aliyuncs.com/shanbayapp/${CI_PROJECT_NAMESPACE}-${CI_PROJECT_NAME}
+  # Change pip's cache directory to be inside the project directory since we can
+  # only cache local items.
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip/"
+
+before_script:
+- IMAGE_TAG=${IMAGE}:${CI_COMMIT_SHA:0:8}
+
+# Pip's cache doesn't store the python packages
+# https://pip.pypa.io/en/stable/reference/pip_install/#caching
+#
+# If you want to also cache the installed packages, you have to install
+# them in a virtualenv and cache it as well.
+cache:
+  key: ${CI_JOB_NAME}
+  paths:
+  - ${PIP_CACHE_DIR}
+
+#========================================= Unit Testing ================================================
+test_all:
+  image: "registry.cn-hangzhou.aliyuncs.com/shanbay/pymicro-pipenv"
+  stage: test_all
+  before_script:
+  - python -V
+  - pipenv install --dev --deploy
+  - pipenv run pip install -r local_requirements.txt -i https://pypi.17bdc.com/simple
+
+  script:
+  - pipenv run flake8 app commands tests
+  - pipenv run pytest tests
+
+
+#========================================== Deploy Testing =================================================
+deploy_integration:
+  stage: deploy_integration
+  only:
+  - develop
+  - master
+  when: manual
+  tags:
+  - deploy-integration
+  #  https://git.17bdc.com/help/ci/environments
+  environment:
+    name: integration
+  script:
+  - kubectl -n douya set image deploy/{{cookiecutter.project_name}}-api "app=${IMAGE_TAG}" --record
+  - kubectl -n douya set image deploy/{{cookiecutter.project_name}}-celery "app=${IMAGE_TAG}" --record
+
+deploy_staging:
+  stage: deploy_staging
+  only:
+  - develop
+  - master
+  when: manual
+  tags:
+  - deploy-staging
+  environment:
+    name: staging
+  script:
+  - kubectl -n douya set image deploy/{{cookiecutter.project_name}}-api "app=${IMAGE_TAG}" --record
+  - kubectl -n douya set image deploy/{{cookiecutter.project_name}}-celery "app=${IMAGE_TAG}" --record
+
+deploy_production:
+  stage: deploy_production
+  only:
+  - master
+  when: manual
+  tags:
+  - deploy-production
+  environment:
+    name: production
+  script:
+  - kubectl -n douya set image deploy/{{cookiecutter.project_name}}-api "app=${IMAGE_TAG}" --record
+  - kubectl -n douya set image deploy/{{cookiecutter.project_name}}-celery "app=${IMAGE_TAG}" --record
