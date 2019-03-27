@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{cookiecutter.project_name}}</title>
+    {% block css %}
+        <link rel="stylesheet" href="{{ url_for("static",filename="css/bootstrap.min.css") }} ">
+        <link rel="stylesheet" href="{{ url_for("static",filename="css/tether.min.css") }}">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    {% endblock %}
+</head>
+<body>
+{% block navbar %}
+    <nav class="navbar navbar-expand-md bg-info">
+        <a href="/" class="navbar-brand">{{cookiecutter.project_name}}</a>
+        <!--收缩按钮-->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav  nav-fill mr-auto">
+                <li class=" active"><p id="current_user"></p></li>
+                <li class=" active"><a class="nav-link" href="/blog">article</a></li>
+                <li class=" active"><a class="nav-link" id="nav-video" href="/video">video</a></li>
+                <form class="form-inline" action="/upload" method="post" enctype="multipart/form-data">
+                    <input class="form-check-input" type="file" name="file" id="file">
+                    <input class="btn btn-info" type="submit" value="上传" name="submit">
+                </form>
+            </ul>
+            <form class="form-inline" onsubmit="">
+                <input class="form-control mr-sm-3" type="search" placeholder="Search" aria-label="Search">
+            </form>
+        </div>
+    </nav>
+
+
+{% block footer %}
+    <footer class="blog-footer">
+        <p>website for {{cookiecutter.project_name}}</p>
+        <p><a href="#">return top</a></p>
+    </footer>
+{% endblock %}
+</body>
+{% block script %}
+    <script src="{{ url_for("static",filename="js/jquery.min.js") }}"></script>
+    <script src="{{ url_for("static",filename="js/popper.js") }}"></script>
+    <script src="{{ url_for("static",filename="js/bootstrap.min.js") }}"></script>
+{% endblock %}
+</html>

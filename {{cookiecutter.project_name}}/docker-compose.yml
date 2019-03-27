@@ -1,0 +1,57 @@
+version: '3'
+services:
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/logs:/var/log/nginx/
+    ports:
+      - 8000:80
+    depends_on:
+      - {{cookiecutter.project_name}}
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - /data/mysql/{{cookiecutter.project_name}}/data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: newpass
+      MYSQL_DATABASE: {{cookiecutter.project_name}}
+#    env_file:
+#      - env/mysql.env
+  redis:
+    image: redis:4.0
+    volumes:
+      - /data/redis/data:/data
+    restart: always
+  {{cookiecutter.project_name}}:
+    depends_on:
+      - mysql
+      - redis
+    build: .
+    image: {{cookiecutter.project_name}}:latest
+    ports:
+      - 5000:5000
+    restart: always
+    environment:
+      DB_HOST: mysql
+      REDIS_HOST: redis
+      FLASK_ENV: production
+    command: bash -c "./boot.sh run"
+  celery_worker:
+    depends_on:
+      - redis
+      - mysql
+    image: {{cookiecutter.project_name}}:latest
+    restart: always
+    environment:
+      REDIS_HOST: redis
+    command: ./boot.sh run_celery
+  celery_beat:
+    depends_on:
+      - redis
+      - mysql
+    image: {{cookiecutter.project_name}}:latest
+    environment:
+      REDIS_HOST: redis
+    command: ./boot.sh run_celery_beat

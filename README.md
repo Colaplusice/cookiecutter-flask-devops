@@ -1,12 +1,16 @@
-# 一个基于cookiecutter用于初始化flask项目的模板项目
+#  Flask template based on docker bootstrap4 for continuous integration & continuous delivery
 
-## 安装cookiecutter
+## install cookiecutter
 
 pip install cookiecutter
 
-## 生成模板
+## generate project
 
-cookiecutter <https://github.com/audreyr/cookiecutter-pypackage.git>
+cookiecutter <https://github.com/Colaplusice/cookiecutter-flask-devops.git>
+or
+```
+cd
+```
 项目的地址可以为 git 链接, 或者将项目放在 ~/.cookiecutter 路径下, 相当于全局变量, 可以 cookiecutter project_name 直接生成。或者用绝对路径来生成。
 
 ## 可选参数
