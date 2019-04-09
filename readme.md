@@ -27,12 +27,12 @@ and you can `cookiecutter cookiecutter-flask-devops` everywhere
 
 ## project options
 
-- project_name  project name to generate
-- app_name      app name
-- create_api  yes/no whether to generate rest api
-- vps_ssh   your vps ssh address like ubuntu@111.231.1.1
-- database_username  database username,default is root
-- database_password  database password
+- project_name          :project name to generate
+- app_name              :app name
+- create_api  yes/no    :whether to generate rest api
+- vps_ssh               :your vps ssh address like ubuntu@111.231.1.1
+- database_username     :database username,default is root
+- database_password     :database password
 
 ## example 
 
@@ -55,4 +55,4 @@ docker-compose up
 ```
 
 open http://localhost  and you will see:
-[logo]: ./screen.png
+ ![](./screen.png)
