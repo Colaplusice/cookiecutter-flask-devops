@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function run() {
-   source .env
+   source ./.env
    gunicorn -c gunicorn.py run:app
 }
 

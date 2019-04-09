@@ -2,10 +2,10 @@
 
 ## feature
 
-- [ x ]  html5-boilerplate for template
-- [ x ]  peewee for orm and migration achieved 
-- [ x ]  docker & docker-compose integration
-- [ x ]  per-commit & pytest & flake8 & black for workflow.
+- [x]  html5-boilerplate for template
+- [x]  peewee for orm and migration achieved 
+- [x]  docker & docker-compose integration
+- [x]  per-commit & pytest & flake8 & black for workflow.
 - [ ]    gitlab-ci for deployment on vps 
 
 ## usage
@@ -25,14 +25,34 @@ git clone  https://github.com/Colaplusice/cookiecutter-flask-devops.git
 ```
 and you can `cookiecutter cookiecutter-flask-devops` everywhere 
 
-## option args
-
-- --no-input
-- -f --overwrite-if-exists
-- --config-file PATH
-
 ## project options
 
-- project_name  # project name to generate
-- app_name      # app name
-- create_api  yes/no # whether to generate rest api
+- project_name  project name to generate
+- app_name      app name
+- create_api  yes/no whether to generate rest api
+- vps_ssh   your vps ssh address like ubuntu@111.231.1.1
+- database_username  database username,default is root
+- database_password  database password
+
+## example 
+
+```bash
+cookiecutter cookiecutter-flask-devops
+
+# cd the project you just created
+cd flask_project
+
+# create database on you localhost 
+./boot.sh  createdb flask_project
+./boot.sh  createdb flask_project_test
+
+# unit test
+pytest -s -x
+
+# test run by docker-compose
+docker-compose up 
+
+```
+
+open http://localhost  and you will see:
+[logo]: ./screen.png

@@ -1,7 +1,7 @@
-from flask import Response
+from flask import jsonify
 from flask.views import MethodView
 
 
 class HelloView(MethodView):
     def get(self):
-        return Response("thanks for use my cookiecutter template !")
+        return jsonify("thanks for use my cookiecutter template !")

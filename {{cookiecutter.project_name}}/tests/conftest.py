@@ -3,6 +3,7 @@ import os
 import pytest
 
 from {{cookiecutter.app_name}} import create_app
+from {{cookiecutter.app_name}}.extensions import db
 
 
 def pytest_sessionstart(session):
@@ -15,9 +16,9 @@ def app():
     os.environ["FLASK_ENV"] = "testing"
     app = create_app()
     with app.app_context():
-        app.database.create_tables([])
+        db.database.create_tables([])
         yield app
-        app.database.drop_tables([])
+        db.database.drop_tables([])
 
 
 @pytest.fixture
