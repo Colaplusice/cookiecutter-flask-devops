@@ -1,4 +1,8 @@
-#  Flask template based on docker bootstrap4 for continuous integration & continuous delivery
+#  cookiecutter template for Flask project
+
+## feature
+
+
 
 ## install cookiecutter
 
@@ -26,17 +30,3 @@ cd
 - project_name  # 生成 project 的名称
 - app_name      # flask app 的名称
 - create_api  yes/no #是否生成带有 api 配置的模板
-
-## Changes
-
-### v18.09.13
-
-- 项目创建，初始化 flask 模版
-
-### v18.09.20
-
-- 添加 pre-commit, 在 commit 提交之前检查空格, 文件结束行和代码格式等问题
-
-### v18.10.12
-
-- 添加 isort, seed-isort-config 格式化导入

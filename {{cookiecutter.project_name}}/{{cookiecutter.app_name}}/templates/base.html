@@ -1,0 +1,37 @@
+{% raw %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}
+    {% endraw %}
+        <title>{{cookiecutter.project_name}}</title>
+    {% raw %}
+    {% endblock %}
+    {% block css %}
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    {% endblock %}
+</head>
+<body>
+{% block content %}
+
+{% endblock %}
+
+{% block footer %}
+    <footer class="blog-footer">
+        {% endraw %}
+        <p>website for {{cookiecutter.project_name}}</p>
+        {% raw %}
+        <p><a href="#">return top</a></p>
+    </footer>
+{% endblock %}
+</body>
+{% block script %}
+    <script src="{{ url_for("static",filename="js/vendor/jquery-3.3.1.min.js") }}"></script>
+    <script src="{{ url_for("static",filename="js/vendor/modernizr-3.7.1.min.js") }}"></script>
+    <script src="{{ url_for("static",filename="js/main.js") }}"></script>
+    <script src="{{ url_for("static",filename="js/plugins.js") }}"></script>
+{% endblock %}
+
+</html>
+{% endraw %}

@@ -67,7 +67,7 @@ def test_bake_with_defaults(cookies):
         found_toplevel_files = [f.basename for f in result.project.listdir()]
         assert "tests" in found_toplevel_files
         assert "Dockerfile" in found_toplevel_files
-        assert "app" in found_toplevel_files
+        assert "{{cookiecutter.app_name}}" in found_toplevel_files
         assert "configs" in found_toplevel_files
         assert ".gitlab-ci.yml" in found_toplevel_files
 
@@ -95,9 +95,9 @@ def test_using_pytest(cookies):
 
 def test_create_api(cookies):
     with bake_in_temp_dir(cookies, extra_context={"create_api": "n"}) as result:
-        test_path = os.path.join(str(result.project), "app/api")
+        test_path = os.path.join(str(result.project), "{{cookiecutter.app_name}}/api")
         assert not os.path.isdir(test_path)
 
     with bake_in_temp_dir(cookies, extra_context={"create_api": "yes"}) as result:
-        test_path = os.path.join(str(result.project), "app/api")
+        test_path = os.path.join(str(result.project), "{{cookiecutter.app_name}}/api")
         assert os.path.isdir(test_path)

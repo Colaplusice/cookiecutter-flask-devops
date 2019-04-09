@@ -7,7 +7,7 @@ USER="root"
 PASS="newpass"
 HOST='localhost'
 PORT=3306
-DB_NAME="{{cookiecutter.project_name}}"
+DB_NAME={{cookiecutter.project_name}}
 
 
 
@@ -24,18 +24,18 @@ check_non_empty() {
 createdb() {
     
 mysql -h $HOST -P $PORT  -u$USER -p$PASS <<EOF 2>/dev/null
-CREATE DATABASE $DB_NAME CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE $1 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 EOF
     [ $? -eq 0 ] && echo Created DB SUCCESS! || echo DB already exist
 }
 
-# 导入sql数据
+# import .sql to database
 dump_sql(){
     if mysql -u$USER -p$PASS -h $HOST -P $PORT  $DB_NAME < "$2"
     then
-        echo "导入数据成功"
+        echo "success"
     else
-        echo "导入数据失败，状态码为 $?"
+        echo "failed，exit code is $?"
         exit $?
     fi
 }

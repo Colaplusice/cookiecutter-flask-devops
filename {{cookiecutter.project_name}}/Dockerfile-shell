@@ -1,9 +1,0 @@
-FROM registry.cn-hangzhou.aliyuncs.com/shanbay/pymicro:onbuild
-
-RUN apt-get update && apt-get install -y --no-install-recommends \
-        vim \
-        redis-tools \
-        mysql-client \
-        zip \
-      && rm -rf /var/lib/apt/lists/*
-RUN pip install mycli jupyter_console -i https://mirrors.ustc.edu.cn/pypi/web/simple/

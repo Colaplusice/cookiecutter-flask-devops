@@ -1,25 +1,26 @@
-import pytest
 import os
+
+import pytest
+
+from {{cookiecutter.app_name}} import create_app
 
 
 def pytest_sessionstart(session):
     os.environ["FLASK_ENV"] = "testing"
-    from coast.flask import create_app
-
     create_app()
 
 
 @pytest.fixture(scope="session")
 def app():
-    from flask import current_app
+    os.environ["FLASK_ENV"] = "testing"
+    app = create_app()
+    with app.app_context():
+        app.database.create_tables([])
+        yield app
+        app.database.drop_tables([])
 
-    yield current_app
 
-
-@pytest.fixture()
+@pytest.fixture
 def client(app):
     client = app.test_client()
-    ctx = app.app_context()
-    ctx.push()
-    yield client
-    ctx.pop()
+    return client

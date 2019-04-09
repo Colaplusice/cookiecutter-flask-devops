@@ -1,10 +1,7 @@
 FROM python:3.6
-RUN adduser --disabled-login athena
-WORKDIR /home/athena
+RUN adduser --disabled-login {{cookiecutter.app_name}}
+WORKDIR /home/{{cookiecutter.app_name}}
 COPY . .
 # debian
-COPY ./sources.list /etc/apt/
-RUN apt-get update &&apt-get install libssl-dev
-RUN pip install -r requirements.txt
+RUN pip install -r requirements.txt -i https://pypi.doubanio.com/simple/
 RUN chmod -R +x .
-ENV FLASK_ENV=production
