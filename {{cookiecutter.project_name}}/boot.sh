@@ -12,9 +12,21 @@ function deploy() {
    ssh  {{cookiecutter.vps_ssh}} "cd /home/ubuntu/{{cookiecutter.project_name}}; git push github master"
 }
 
-function create_db() {
+function createdb() {
    mysql -u {{cookiecutter.database_username}} -p{{cookiecutter.database_username}} -e "create database $1 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
 }
+
+# import .sql to database
+dump_sql(){
+    if mysql -u$USER -p$PASS -h $HOST -P $PORT  $DB_NAME < "$2"
+    then
+        echo "success"
+    else
+        echo "failed，exit code is $?"
+        exit $?
+    fi
+}
+
 Action=$1
 shift
  case "$Action" in
@@ -22,20 +34,19 @@ shift
     run ;;
  deploy)
     deploy;;
- run_celery)
- run_celery;;
- run_celery_beat)
- run_celery_beat;;
  migrate)
  migrate;;
- create_db )
- create_db "$1";;
+ createdb )
+ createdb "$1";;
+ dump_sql )
+ dump_sql "$1";;
     *) echo 'usage: ./boot.sh command
      command:
      runserver:                  run
      update code and deploy:     deploy
      migrate data                migrate
-     create_db                   create_db [dbname]
+     createdb                   createdb [dbname]
+     dump_sql                   dump_sql [sql]
      ' ;;
 
 esac

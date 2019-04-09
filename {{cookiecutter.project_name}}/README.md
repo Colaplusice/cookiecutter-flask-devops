@@ -1,36 +1,13 @@
 # {{cookiecutter.project_name}}
 
- - 进入Shell
- ```
- flask shell
- ```
+- use Shell: `python run.py shell`
 
- - 本地启动
+- develop run: `python run.py runserver`
 
- ```
- flask server
- ````
+- create database: `./boot.sh createdb [dbname]`
 
- - gunicorn启动
+- migrate: `python run.py migrate`
 
- ```
-gunicorn -c gunicorn/xxxx.pymanage:app
- ```
+- gunicorn run: `gunicorn -c gunicorn.py run:app`
 
- - run command
-
- ```
- flask <command name>
- ```
-
- - run celery
-
- ```
-flask celery worker --loglevel=debug
- ```
-
- - run celery beat
-
- ```
-flask celery beat --loglevel=debug
- `
+- docker-compose: docker-compose up

@@ -3,9 +3,10 @@
 ## feature
 
 - [ x ]  html5-boilerplate for template
-- [ x ]  docker & docker-compose & gitlab-ci for deployment on vps 
-- [ x ]  per-commit & pytest & flake8 & black for code control.
-
+- [ x ]  peewee for orm and migration achieved 
+- [ x ]  docker & docker-compose integration
+- [ x ]  per-commit & pytest & flake8 & black for workflow.
+- [ ]    gitlab-ci for deployment on vps 
 
 ## usage
 
@@ -17,6 +18,7 @@ pip install cookiecutter
 
 cookiecutter <https://github.com/Colaplusice/cookiecutter-flask-devops.git>
 or
+
 ```bash
 cd ~/.cookiecutters/
 git clone  https://github.com/Colaplusice/cookiecutter-flask-devops.git

@@ -11,6 +11,8 @@ services:
       - {{cookiecutter.project_name}}
 
   {{cookiecutter.project_name}}:
+    depends_on:
+      - db
     build: .
     image:  {{cookiecutter.project_name}}:latest
     restart: always
