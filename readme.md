@@ -1,5 +1,7 @@
 #  cookiecutter template for Flask project
 
+[中文](./readme_zh.md)
+
 ## feature
 
 - [x]  html5-boilerplate for template

@@ -6,3 +6,5 @@ pendulum
 pymysql
 Flask-Script
 pytest-cov
+pytest_cookies
+pyyaml
