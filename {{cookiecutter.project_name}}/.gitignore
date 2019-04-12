@@ -22,3 +22,4 @@ coverage.xml
 
 ### macOS template
 .DS_Store
+.env
