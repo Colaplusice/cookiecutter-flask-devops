@@ -1,6 +1,6 @@
 def test_health(client):
-    assert client.get("/api/health").status_code == 404
-    assert client.get("/api/health?type=liveness").status_code == 200
+    assert client.get("/health").status_code == 404
+    assert client.get("/health?type=liveness").status_code == 200
 
 
 def test_hello_view(client):

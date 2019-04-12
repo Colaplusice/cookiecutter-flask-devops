@@ -6,3 +6,4 @@ pendulum
 pymysql
 Flask-Script
 pytest-cov
+flake8

@@ -7,9 +7,14 @@ function run() {
 
 function deploy() {
     # note: this need to change your real path for project
-   ssh  {{cookiecutter.vps_ssh}} "cd /home/ubuntu/flask_project/{{cookiecutter.project_name}}; git pull"
-   ssh  {{cookiecutter.vps_ssh}} "cd /home/ubuntu/flask_project/{{cookiecutter.project_name}}; /home/ubuntu/miniconda3/bin/docker-compose up -d --build"
-   ssh  {{cookiecutter.vps_ssh}} "cd /home/ubuntu/flask_project/{{cookiecutter.project_name}}; git push github master"
+     path="/home/ubuntu/flask_project/{{cookiecutter.project_name}}"
+   if [ ! -d $path ]; then
+   ssh  {{cookiecutter.vps_ssh}} "git clone https://github.com/Colaplusice/{{cookiecutter.project_name}} $path"
+   else
+   ssh  {{cookiecutter.vps_ssh}} "cd $path ; git pull"
+   fi
+   ssh  {{cookiecutter.vps_ssh}} "cd $path ; /home/ubuntu/miniconda3/bin/docker-compose up -d --build"
+   ssh  {{cookiecutter.vps_ssh}} "cd $path ; git push github master"
 }
 
 function createdb() {
