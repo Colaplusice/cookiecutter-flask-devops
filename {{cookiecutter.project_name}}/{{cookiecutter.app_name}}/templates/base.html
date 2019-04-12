@@ -11,6 +11,7 @@
     {% block css %}
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
     {% endblock %}
+     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='image/icon.ico') }}">
 </head>
 <body>
 {% block content %}
@@ -27,8 +28,8 @@
 {% endblock %}
 </body>
 {% block script %}
-    <script src="{{ url_for("static",filename="js/vendor/jquery-3.3.1.min.js") }}"></script>
-    <script src="{{ url_for("static",filename="js/vendor/modernizr-3.7.1.min.js") }}"></script>
+    <script src="{{ url_for("static",filename="js/vendor/jquery-3.3.1.min.js")}}"></script>
+    <script src="{{ url_for("static",filename="js/vendor/modernizr-3.7.1.min.js")}}"></script>
     <script src="{{ url_for("static",filename="js/main.js") }}"></script>
     <script src="{{ url_for("static",filename="js/plugins.js") }}"></script>
 {% endblock %}

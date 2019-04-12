@@ -8,9 +8,12 @@ from flask import (
 )
 from {{cookiecutter.app_name}}.utils import not_exist
 from jinja2.exceptions import TemplateNotFound
+from .health_identify import HealthIdentify
 
-main = Blueprint("run", __name__)
+main = Blueprint("main", __name__)
 main.register_error_handler(TemplateNotFound, not_exist)
+main.add_url_rule("/health", view_func=HealthIdentify.as_view(name="health"), methods=["GET"]
+)
 
 
 @main.route("/")

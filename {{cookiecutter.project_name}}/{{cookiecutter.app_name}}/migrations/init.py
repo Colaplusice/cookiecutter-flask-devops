@@ -1,4 +1,4 @@
-from {{cookiecutter.app_name}}.extentions import db
+from {{cookiecutter.app_name}}.extensions import db
 
 
 def migrate_up():
